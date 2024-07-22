@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+<body>
+    <%- include('partials/navbar') %>
+    <br>
+    <div class="class container">
+        <% if(nome){ %>
+        <a href="/pergunta/<%= nome%>" class="btn btn-success"> Nova pergunta</a>
+        <br>
+        <% }%>
+        <br>
+                <% perguntas.forEach(row => { %>
+                    <div class="card">
+                    <div class="card-header" style="display: flex;justify-content: space-between">
+                        <div><strong><%= row.autor %> </strong> perguntou</div>
+                        <div><strong>Pergunta criada: </strong> <%= row.createdAt %> </div>
+                        
+                    </div>
+                     <div class="card-body">
+                        <%= row.pergunta %>
+                     </div>
+                     <div class="card-footer">
+                        <a href="/responder/<%= row.id%>"><button type="submit" class="btn btn-primary">Responder</button></a>
+                     </div>
+                    </div>
+                    <br>
+               <% }) %>
+           
+        
+        
+    </div>
+
+<%- include('partials/footer') %>

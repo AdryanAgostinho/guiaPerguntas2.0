@@ -1,0 +1,53 @@
+<%- include('partials/header') %>
+<body>
+    <%- include('partials/navbar') %>
+    
+    <div class="class container">
+        <br>
+       <div class="class card" >
+        <div class="class card-body">
+            <h1 class="class text-center">Pergunta: </h1>
+            <br>
+            <input type="text" value="<%= pergunta.pergunta%>" class="form-control" disabled="true">
+            <hr>
+            <h3>Descrição:</h3>
+            <input type="text" value="<%= pergunta.descricao%>" class="form-control" disabled="true">
+            <br>
+            <div style="display: flex;justify-content: space-between;">
+                <div>Pergunta criada por: <%= pergunta.autor%></div>
+                <div> <%= pergunta.createdAt %></div>
+            </div>
+            <hr>
+           <form action="/enviarResposta" method="POST">
+            <label for="nome">Seu Nome:</label>
+            <input type="text" id="nome" class="form-control" placeholder="Digite seu nome aqui" name="usuarioResposta">
+            <br>
+            <label for="respost">Responder:</label>
+             <textarea name="resposta" id="respost" placeholder="Digite sua resposta aqui" class="form-control"></textarea>
+             <input type="hidden" name="idPergunta" value="<%= pergunta.id%>">
+             <br>
+             <button type="submit" class="btn btn-primary">ENVIAR RESPOSTA</button>
+           </form>
+           <br>
+           <hr>últimas respostas:
+           <br>
+           <br>
+           <% respostas.forEach(row=>{ %>
+            <div class="card">
+                <div class="card-body" style="display: flex; justify-content: space-between;">
+                    <p><strong><%= row.usuarioResposta%></strong> respondeu</p>
+                    <%= row.createdAt%>
+                </div>
+                <div class="card-footer"><%= row.Resposta%>    </div>
+            </div>
+            <br>
+              
+           <% })%>
+           
+        </div>
+       </div>
+       
+        
+    </div>
+
+<%- include('partials/footer') %>
